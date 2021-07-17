@@ -34,8 +34,15 @@ export class MessagesService {
    return message;
   }
 
-  create(message: Message) {
-    return this.messages.push(message);
+  create(messageDto: MessageDto) {
+    const id = this.messages.length + 1;
+    const message : Message = {
+      id,
+      ...messageDto,
+    };
+
+    this.messages.push(message);
+    return message;
   }
 
   async update(id: number, messageDto : MessageDto){
