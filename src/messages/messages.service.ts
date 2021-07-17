@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import {MessageDto} from './MessageDto';
+
 
 export interface Message{
   id: number;
@@ -30,4 +32,20 @@ export class MessagesService {
   create(message: Message) {
     return this.messages.push(message);
   }
+
+  async update(id: number, messageDto : MessageDto){
+    const index = this.messages.findIndex((msg) =>msg?.id === id);
+
+    if(index < 0 ){
+      throw Error(`Mensagem dom o ID 'S{id}' não encontrada.`);
+    }
+
+    const message: Message = {
+      id,
+      ...messageDto,
+    };
+    this.messages[index] = message;
+    return message;
+  }
+
 }

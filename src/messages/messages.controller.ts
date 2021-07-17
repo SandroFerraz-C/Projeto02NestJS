@@ -1,8 +1,7 @@
-import { Body } from '@nestjs/common';
-import { Controller, Get, Param, Post } from '@nestjs/common';
-import { create } from 'domain';
+import { Body, Controller, Get, Param, Post, Put, Delete, NotFoundException, ParseIntPipe } from '@nestjs/common';
 import { Message } from './message';
 import { MessagesService } from './messages.service';
+import { MessageDto } from './messageDto';
 
 @Controller('messages')
 export class MessagesController {
@@ -25,4 +24,12 @@ export class MessagesController {
       return this.messagesService.create(message);
  
   }
+
+  @Put(':id')
+  update(@Param('id', ParseIntPipe) id, @Body() messageDto:MessageDto){
+    return this.messagesService.update(id, messageDto).catch((e) => {
+      throw new NotFoundException(e.message);
+    });
+  }
+
 }
