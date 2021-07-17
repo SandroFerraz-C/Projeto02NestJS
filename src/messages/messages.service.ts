@@ -48,4 +48,14 @@ export class MessagesService {
     return message;
   }
 
+  async delete(id: number){
+    const index = this.messages.findIndex((msg) => msg?.id === id);
+
+    if(index < 0 ){
+      throw Error(`Mensagem 'S{id}' não encontrada.`);
+    }
+
+    delete this.messages[index];
+
+  }
 }
