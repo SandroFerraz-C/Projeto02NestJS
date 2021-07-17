@@ -28,7 +28,7 @@ export class MessagesController {
   }
 
   @Put(':id')
-  update(@Param('id', ParseIntPipe) id, @Body() messageDto:MessageDto){
+  update(@Param('id', ParseIntPipe) id,  @Body() messageDto:MessageDto){
     return this.messagesService.update(id, messageDto).catch((e) => {
       throw new NotFoundException(e.message);
     });

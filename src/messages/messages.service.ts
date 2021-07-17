@@ -46,10 +46,10 @@ export class MessagesService {
   }
 
   async update(id: number, messageDto : MessageDto){
-    const index = this.messages.findIndex((msg) =>msg?.id === id);
+    const index = this.messages.findIndex((message:Message) =>message.id === id);
 
     if(index < 0 ){
-      throw Error(`Mensagem dom o ID 'S{id}' não encontrada.`);
+      throw Error (`Mensagem com  ID 'S{id}' não encontrada.`);
     }
 
     const message: Message = {
@@ -64,7 +64,7 @@ export class MessagesService {
     const index = this.messages.findIndex((msg) => msg?.id === id);
 
     if(index < 0 ){
-      throw Error(`Mensagem 'S{id}' não encontrada.`);
+      throw Error(`Mensagem com o ID  'S{id}' não encontrada.`);
     }
 
     delete this.messages[index];
